@@ -14,6 +14,7 @@ const config = {
     },
   ],
   output: BUILD_DIR,
+  url: 'https://idio.cc',
   // to generate sitemaps:
   /* url: https://website.github.io/splendid */
 }
