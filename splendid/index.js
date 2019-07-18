@@ -1,7 +1,7 @@
 import { join } from 'path'
 
 const APP_DIR = 'splendid'
-const BUILD_DIR = 'docs'
+const BUILD_DIR = '.'
 
 /** @type {import('splendid').Config} */
 const config = {
