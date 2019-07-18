@@ -2,5 +2,9 @@
   "splendid": {
     "v": "1.6.1",
     "d": "Static Web Site Generator With JSX As HTML."
+  },
+  "@idio/idio": {
+    "v": "0.1.0",
+    "d": "@Goa/Koa Web Server Bundled With Essential Middleware."
   }
 }

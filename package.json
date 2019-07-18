@@ -26,11 +26,13 @@
   },
   "homepage": "https://github.com/artdecoweb/idio.cc#readme",
   "devDependencies": {
-    "alamode": "^2.2.0",
-    "documentary": "^1.27.2",
+    "alamode": "^2.3.4",
+    "documentary": "^1.27.5",
     "preact": "8.4.2",
-    "splendid": "^1.6.0",
+    "splendid": "^1.6.1",
     "zoroaster": "^4.1.1-alpha"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@idio/idio": "^0.1.0"
+  }
 }

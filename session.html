@@ -7,6 +7,7 @@
     <!-- <link href="styles/prism.css" rel="stylesheet"> -->
     <link href="img/favicon.ico" rel="shortcut icon">
     <link href="https://fonts.googleapis.com/css?family=Ruda" rel="stylesheet">
+    <link href="highlight.js/styles/default.css" rel="stylesheet">
     <link href="css/npm-badge.css" rel="stylesheet">
     <link href="css/loaders/inner-circles.css" rel="stylesheet">
   </head>
@@ -15,13 +16,13 @@
     <div class="table">
       <div class="left-column">
         <div class="logo">
-          <img src="img/logo.jpg" alt="splendid logo">
+          <img src="img/logo.jpg" alt="Idio logo">
         </div>
         <div class="badges">
-          <a class="SimpleBadge" href="https://github.com/artdecocode/splendid">
+          <a class="SimpleBadge" href="https://github.com/idiocc/idio">
             GitHub</a>
-          <a title="Static Web Site Generator With JSX As HTML." class="NPMBadge" href="https://npmjs.com/package/splendid">
-            <span class="name">_Splendid_</span><span class="version">1.6.1</span></a>
+          <a title="@Goa/Koa Web Server Bundled With Essential Middleware." class="NPMBadge" href="https://npmjs.com/package/@idio/idio">
+            <span class="name"><em>@idio/idio</em></span><span class="version">0.1.0</span></a>
         </div>
 
         <h3>Pages</h3>
@@ -33,18 +34,62 @@
         <h3>npm links</h3>
 
         <ul>
-          <li><a href="https://www.npmjs.com/package/splendid">
-   splendid</a></li>
+          <li><a href="https://www.npmjs.com/package/@idio/idio">
+   idio</a></li>
           <li><a href="https://www.npmjs.com/package/mnp">
    mnp</a></li>
         </ul>
       </div>
       <div class="right-column" id="Content">
-        // hello world
+        <h2>The Login And Admin Operations In Idio</h2>
+        
+        <p>
+          The Koa2 web-server actually includes the cookies management package called cookies. The session service package, *<strong>koa-session</strong>* instantiates the session object for the context on each request whenever the <span class="tm">session</span> property is accessed, and uses cookies to store the info that is written to <span class="tm2">ctx.session</span>.
+        </p>
+        
+        <p>
+          The cookies are signed which means that they are hashed and the key is sent to the user in a separate <span class="tm">{cookie-name}:sig</span> cookie. This ensures that users cannot see what's inside of the cookie, because the hash is signed with the key properties set at the start of the server. The keys configuration passed to the session object will be set on the <span class="tm2">app</span> object, otherwise the session middleware constructor will throw an error.
+        </p>
+        
+        <li><a href="https://github.com/idiocc/session">
+           Session</a> The session provides abstraction over cookies, manages the state in the cookie.</li>
+        <li><a href="https://github.com/idiocc/cookies">
+           Cookies</a> The underlying Koa-consumed library, which can use KeyGrip. The idio fork puts <span class="tm">cookies</span> and <em>Keygrip</em> together.</li>
+        <li><a href="https://github.com/idiocc/cookies/blob/71da62bc46a5cbd17be0cea0c0c38f68f97dd3ba/src/index.js#L31">
+           Keygrip</a> The class to rotate and validate keys.</li>
+        
+        <pre><code class="js hljs"><span class="hljs-keyword">import</span> idio <span class="hljs-keyword">from</span> <span class="hljs-string">'@idio/idio'</span>
+
+(<span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">await</span> idio({
+    <span class="hljs-attr">session</span>: { <span class="hljs-attr">use</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">keys</span>:
+        [ <span class="hljs-string">'NON | example'</span>,
+          <span class="hljs-string">'PROD| keys'</span>] },
+  })
+})()</code></pre>
+        
+        The keys object can be a <a href="https://github.com/idiocc/cookies#class-keygrip">
+           Keygrip</a> instance, which must be imported from <span class="tm">@idio</span> as well, however the below is equivalent to passing the keys as an array:
+        
+        <pre><code class="js hljs"><span class="hljs-keyword">import</span> idio <span class="hljs-keyword">from</span> <span class="hljs-string">'@idio/idio'</span>
+
+(<span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-comment">/* start example */</span>
+  <span class="hljs-keyword">import</span> { Keygrip } <span class="hljs-keyword">from</span> <span class="hljs-string">'@idio/idio'</span>
+
+  <span class="hljs-keyword">const</span> keys = <span class="hljs-keyword">new</span> Keygrip([<span class="hljs-string">'rotat1'</span>, <span class="hljs-string">'rotat2'</span>])
+  <span class="hljs-keyword">const</span> { app, url } = <span class="hljs-keyword">await</span> idio({
+    <span class="hljs-attr">session</span>: { <span class="hljs-attr">use</span>: <span class="hljs-literal">true</span>, keys },
+  })
+  <span class="hljs-comment">/* end example */</span>
+  <span class="hljs-built_in">console</span>.log(url)
+  app.destroy()
+})()</code></pre>
       </div>
     </div>
     <footer>
-      &copy; <a href="https://splendid.sh">Splendid</a>, 2019
+      &copy; <a href="https://idio.cc">Idio</a>, 2019
+    
     </footer>
     <script src="js/ajax-loader.js"></script>
     <script>window.AjaxLoader()</script>

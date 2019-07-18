@@ -10,7 +10,7 @@ const config = {
   replacements: [
     {
       re: /{{ company }}/g,
-      replacement: '[Splendid](https://splendid.sh)',
+      replacement: '[Idio](https://idio.cc)',
     },
   ],
   output: BUILD_DIR,
