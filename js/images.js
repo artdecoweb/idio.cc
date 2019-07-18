@@ -1,0 +1,5 @@
+(function(){function d(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}}function e(a){if(!(a instanceof Array)){var b="undefined"!=typeof Symbol&&Symbol.iterator&&a[Symbol.iterator];a=b?b.call(a):{next:d(a)};for(var c=[];!(b=a.next()).done;)c.push(b.value);a=c}return a}var f="srcset"in document.createElement("img");
+function g(a){var b=a.getAttribute("data-src"),c=a.getAttribute("data-srcset");a.removeAttribute("data-src");a.removeAttribute("data-srcset");!b||f&&c||(a.src=b);c&&f&&(a.srcset=c)}var h=new IntersectionObserver(function(a){a.forEach(function(b){var c=b.target;if(b.isIntersecting){switch(c.tagName){case "PICTURE":[].concat(e(c.querySelectorAll("source")),[c.querySelector("img")]).forEach(g);break;case "IMG":g(c)}h.unobserve(c)}})},{rootMargin:"0px 0px 76px 0px"});
+window.IO=function(){var a=[].concat(e(document.querySelectorAll("img[io]"))).filter(function(b){return"PICTURE"!=b.parentNode.tagName});[].concat(e(document.querySelectorAll("picture[io]")),e(a)).forEach(function(b){b.removeAttribute("io");h.observe(b)})};window.IO();}).call(this);
+
+//# sourceMappingURL=images.js.map

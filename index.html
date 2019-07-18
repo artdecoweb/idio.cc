@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Main Page</title>
+    <title>Idio Web Server In Node.JS</title>
     <link href="styles/app.css" rel="stylesheet">
     <!-- Custom Prism Style -->
     <!-- <link href="styles/prism.css" rel="stylesheet"> -->
     <link href="img/favicon.ico" rel="shortcut icon">
     <link href="https://fonts.googleapis.com/css?family=Ruda" rel="stylesheet">
-    <link href="css/npm-badge.css" rel="stylesheet">
     <link href="css/loaders/inner-circles.css" rel="stylesheet">
+    <link href="css/npm-badge.css" rel="stylesheet">
   </head>
   <body>
     <span class="inner-circles-loader" style="display:none;" id="SplendidLoader">Loading...</span>
@@ -26,7 +26,9 @@
 
         <h3>Pages</h3>
 
-        <ul class="AjaxNav"><li class="Active"><a data-file="index" href="/">Main Page</a></li></ul>
+        <ul class="AjaxNav"><li class><a data-file="session" href="session.html">
+  Session Management In Idio Node.JS Web Server</a></li><li class="Active"><a data-file="index" href="/">
+  Idio Web Server In Node.JS</a></li></ul>
 
         <h3>npm links</h3>
 
@@ -38,9 +40,25 @@
         </ul>
       </div>
       <div class="right-column" id="Content">
-        <h1>Main Page</h1>
+        <h1>Idio Web Server In Node.JS</h1>
         
-        This is the main page. Hello world!
+        The <em>Idio</em> web server is a distribution of the Koa2 web server with strategic middleware. It has been compiled to not include any 3rd party dependencies, ie., after installing this package, there will be only 1 more dependency in <span class="tm">node_modules</span> (mime-db). This is achieved with the work done of annotating the Koa2-infrastructure for Closure Compiler, and using it to create a single library file.
+        
+        The annotations are written as JSDoc and don't include Typings, but the context property is accessed in the middleware. However, they include the <span class="tm">import</span> statements, because this package was written for VSCode (or other editors that support TypeScript type syntax). Typings are too technological and contradict the purpose of the <em>Idio</em> web server which to be use pure JavaScript in building great <em>Node.JS</em> applications.
+        
+        <img alt="Idio Web Server With Session And Custom Middleware With Access To Context Autocompletion." io data-src="img/idio.gif">
+        <noscript><img alt="Idio Web Server With Session And Custom Middleware With Access To Context Autocompletion." src="img/idio.gif"></noscript>
+        
+        <p>
+          The use-cases that can be achieved with the middleware include:
+        </p>
+        
+        <ul>
+          <li><a href="session.html">Session management</a></li>
+          <li>Multipart/form-data form submission and file upload</li>
+          <li>Serving static pages</li>
+          <li>Enabling compression</li>
+        </ul>
         
         <p class="SectionBreak">
           <a title="Back To Top" href="#top">
@@ -60,6 +78,8 @@
     <footer>
       &copy; <a href="https://splendid.sh">Splendid</a>, 2019
     </footer>
+    <script src="js/polyfill/intersection-observer.js"></script>
+    <script src="js/images.js"></script>
     <script src="js/ajax-loader.js"></script>
     <script>window.AjaxLoader()</script>
   </body>
