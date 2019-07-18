@@ -7,6 +7,7 @@
     <!-- <link href="styles/prism.css" rel="stylesheet"> -->
     <link href="img/favicon.ico" rel="shortcut icon">
     <link href="https://fonts.googleapis.com/css?family=Ruda" rel="stylesheet">
+    <link href="highlight.js/styles/default.css" rel="stylesheet">
     <link href="css/loaders/inner-circles.css" rel="stylesheet">
     <link href="css/npm-badge.css" rel="stylesheet">
   </head>
@@ -27,7 +28,7 @@
         <h3>Pages</h3>
 
         <ul class="AjaxNav"><li class><a data-file="session" href="session.html">
-  Session Management In Idio Node.JS Web Server</a></li><li class="Active"><a data-file="index" href="/">
+  Session Management</a></li><li class="Active"><a data-file="index" href="/">
   Idio Web Server In Node.JS</a></li></ul>
 
         <h3>npm links</h3>
@@ -42,9 +43,57 @@
       <div class="right-column" id="Content">
         <h1>Idio Web Server In Node.JS</h1>
         
-        The <em>Idio</em> web server is a distribution of the Koa2 web server with strategic middleware. It has been compiled to not include any 3rd party dependencies, ie., after installing this package, there will be only 1 more dependency in <span class="tm">node_modules</span> (mime-db). This is achieved with the work done of annotating the Koa2-infrastructure for Closure Compiler, and using it to create a single library file.
+        <p>
+          The <em>Idio</em> web server is a distribution of the Koa2 web server with strategic middleware. It has been compiled to not include any 3rd party dependencies, ie., after installing this package, there will be only 1 more dependency in <span class="tm">node_modules</span> (mime-db). This is achieved with the work done of annotating the Koa2-infrastructure for Closure Compiler, and using it to create a single library file.
+        </p>
         
-        The annotations are written as JSDoc and don't include Typings, but the context property is accessed in the middleware. However, they include the <span class="tm">import</span> statements, because this package was written for VSCode (or other editors that support TypeScript type syntax). Typings are too technological and contradict the purpose of the <em>Idio</em> web server which to be use pure JavaScript in building great <em>Node.JS</em> applications.
+        <p>
+          The annotations are written as <em>JSDoc</em> and don't include Typings, but the context property is accessed in the middleware. However, <em>JSDoc</em> comments include the <span class="tm">import</span> statements (<span class="tm2">@type {import(&apos;package&apos;).Type}</span>), because this package was written for VSCode (or other editors that support TypeScript type syntax). Typings are too technological and contradict the purpose of the <em>Idio</em> web server which to be use pure JavaScript in building great <em>Node.JS</em> applications. 
+        </p>
+        <blockquote class="blockquote">
+          The End User Experience For Hints Is Great
+        </blockquote>
+        <blockquote class="blockquote">
+          <li>Support for middleware session configuration documentation from within the IDE;</li>
+        </blockquote>
+        <blockquote class="blockquote">
+          <li>Access to all Koa's context property in any middleware.</li>
+        </blockquote>
+        <blockquote class="blockquote">
+          <li>Control the order in which the middleware is instantiated.</li>
+        </blockquote>
+        <blockquote class="blockquote">
+          <li>Don't <span class="tm">use</span> middleware for all paths, just set the middleware functions up and return them in the <span class="tm2">middleware</span> object, which can then be passed to router.</li>
+        </blockquote>
+        
+        <pre><code class="js hljs"><span class="hljs-keyword">const</span> { <span class="hljs-attr">middleware</span>: MIDDLEWARE, app } = <span class="hljs-keyword">await</span> idio({
+  <span class="hljs-attr">SESSION</span>: {
+    <span class="hljs-attr">use</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">/* default false */</span>
+    config: {
+      <span class="hljs-comment">// ... config</span>
+    }
+    keys: [<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>],
+  },
+  <span class="hljs-attr">MIDDLEWARE</span>: { <span class="hljs-comment">// any existing middleware</span>
+    use: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">config</span>: {
+      <span class="hljs-comment">// ... config</span>
+    }
+    optionA: process.env.DATA_STORE,
+    <span class="hljs-comment">// ...options,</span>
+  },
+  <span class="hljs-comment">// always will be used</span>
+  <span class="hljs-keyword">async</span> asFunction(ctx, next) {
+    ctx.body = <span class="hljs-string">'hello-world'</span>
+    <span class="hljs-keyword">await</span> next()
+  }
+})
+app.use(<span class="hljs-keyword">async</span> (ctx, next) =&gt; {
+  <span class="hljs-keyword">if</span> (ctx.path == <span class="hljs-string">'access'</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> MIDDLEWARE()
+  }
+  <span class="hljs-keyword">await</span> next()
+})</code></pre>
         
         <img alt="Idio Web Server With Session And Custom Middleware With Access To Context Autocompletion." io data-src="img/idio.gif">
         <noscript><img alt="Idio Web Server With Session And Custom Middleware With Access To Context Autocompletion." src="img/idio.gif"></noscript>

@@ -15,8 +15,11 @@ export const main = {
 const d = {
   'session': {
     file: 'session',
-    title: 'Session Management In Idio Node.JS Web Server',
+    title: 'Session Management',
     url: 'session.html',
+    og: {
+      description: 'Signed Logins and Admins In Idio Node.JS Web Server',
+    },
   },
 }
 
